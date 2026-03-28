@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My English Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #2ec4b6;
+    --coral: #ff6b6b;
+    --yellow: #ffd166;
+    --purple: #9b5de5;
+    --green: #06d6a0;
+    --navy: #1a1a2e;
+    --soft-bg: #f8f9ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--soft-bg);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .portfolio-header {
+    background: linear-gradient(135deg, var(--teal), var(--purple));
+    color: white;
+    text-align: center;
+    padding: 2.5rem 1rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+  .portfolio-header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 250px; height: 250px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .portfolio-header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.8rem;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .portfolio-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-top: 0.4rem;
+    position: relative;
+  }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 1.5rem 1rem;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.2rem;
+    border: 2.5px solid transparent;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: var(--soft-bg);
+    color: var(--navy);
+  }
+  .tab-btn:hover { transform: translateY(-2px); }
+  .tab-btn.active { color: white; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+  .tab-btn[data-tab="1"].active { background: var(--teal); border-color: var(--teal); }
+  .tab-btn[data-tab="2"].active { background: var(--coral); border-color: var(--coral); }
+  .tab-btn[data-tab="3"].active { background: var(--purple); border-color: var(--purple); }
+  .tab-btn[data-tab="4"].active { background: var(--green); border-color: var(--green); }
+
+  /* ===== SECTIONS ===== */
+  .section { display: none; padding: 2rem 1rem 3rem; max-width: 860px; margin: 0 auto; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid;
+  }
+  .section-header .icon { font-size: 2.2rem; }
+  .section-header h2 { font-family: 'Fredoka One', cursive; font-size: 1.9rem; }
+  .section-header .badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    color: white;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Colors per section */
+  #s1 .section-header { border-color: var(--teal); }
+  #s1 .section-header h2 { color: var(--teal); }
+  #s1 .section-header .badge { background: var(--teal); }
+  #s2 .section-header { border-color: var(--coral); }
+  #s2 .section-header h2 { color: var(--coral); }
+  #s2 .section-header .badge { background: var(--coral); }
+  #s3 .section-header { border-color: var(--purple); }
+  #s3 .section-header h2 { color: var(--purple); }
+  #s3 .section-header .badge { background: var(--purple); }
+  #s4 .section-header { border-color: var(--green); }
+  #s4 .section-header h2 { color: var(--green); }
+  #s4 .section-header .badge { background: var(--green); }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.6rem;
+    margin-bottom: 1.4rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== SECTION 1: About Me ===== */
+  .profile-card {
+    background: linear-gradient(135deg, #e8f8f7, #f0eeff);
+    border: 2px solid var(--teal);
+  }
+  .profile-card .name-line {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--teal);
+    margin-bottom: 0.3rem;
+  }
+  .job-badges { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1rem 0; }
+  .job-badge {
+    background: var(--teal);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .info-item { background: white; border-radius: 14px; padding: 0.9rem 1rem; }
+  .info-item .label { font-size: 0.75rem; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .info-item .value { font-size: 1rem; font-weight: 700; margin-top: 0.2rem; }
+  .speech-bubble {
+    background: var(--teal);
+    color: white;
+    border-radius: 18px 18px 18px 4px;
+    padding: 1.2rem 1.4rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  .speech-bubble strong { font-weight: 900; }
+
+  /* ===== SECTION 2: All About Me ===== */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-box {
+    background: white;
+    border-radius: 18px;
+    padding: 1.2rem;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+  }
+  .about-box .box-title {
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .about-box ul { list-style: none; }
+  .about-box ul li {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed #eee;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .about-box ul li:last-child { border: none; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== SECTION 3: Daily Routine ===== */
+  .routine-list { list-style: none; }
+  .routine-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px dashed #eee;
+  }
+  .routine-item:last-child { border: none; }
+  .time-badge {
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    color: white;
+    flex-shrink: 0;
+  }
+  .routine-text { font-size: 1rem; font-weight: 600; padding-top: 0.2rem; }
+
+  /* ===== SECTION 4: Instrument ===== */
+  .steps-list { list-style: none; counter-reset: steps; }
+  .step-item {
+    counter-increment: steps;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px dashed #eee;
+  }
+  .step-item:last-child { border: none; }
+  .step-num {
+    width: 34px; height: 34px;
+    background: var(--green);
+    color: white;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-text { font-size: 0.97rem; font-weight: 600; padding-top: 0.4rem; }
+
+  .materials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-top: 0.5rem; }
+  .material-tag {
+    background: #f0faf5;
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .bonus-box {
+    background: linear-gradient(135deg, #ffd166, #ff9a3c);
+    color: white;
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .bonus-box .star { font-size: 1.5rem; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+    .materials-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-header h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="portfolio-header">
+  <h1>📚 My English Portfolio</h1>
+  <p>All my assignments in one place — ¡Mis evidencias de inglés!</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="1" onclick="showTab(1)">👤 Evidence 1: About Me</button>
+  <button class="tab-btn" data-tab="2" onclick="showTab(2)">🌟 Evidence 2: All About Me</button>
+  <button class="tab-btn" data-tab="3" onclick="showTab(3)">🕐 Evidence 3: Daily Routine</button>
+  <button class="tab-btn" data-tab="4" onclick="showTab(4)">🎵 Final: Instrument</button>
+</div>
+
+<!-- ===================== SECTION 1 ===================== -->
+<section id="s1" class="section active">
+  <div class="section-header">
+    <span class="icon">👤</span>
+    <h2>Tell Us About You!</h2>
+    <span class="badge">Evidence 1</span>
+  </div>
+
+  <div class="card profile-card">
+    <div class="name-line">Hi! I'm Cristhian Camilo 👋</div>
+    <p style="color:#555; font-size:0.95rem;">Artist from Bucaramanga, Colombia 🇨🇴🎤</p>
+    <div class="job-badges">
+      <span class="job-badge">🎶Artist</span>
+      <span class="job-badge">.💻 Programmer</span>
+      <span class="job-badge">📍 Bucaramanga</span>
+      <span class="job-badge">🇨🇴 Colombian</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--teal);">🗣️ My Presentation Script</h3>
+    <div class="speech-bubble">
+      Hello, everyone! <strong>My name is Cristhian Camilo Lizcano.</strong><br><br>
+      I am an <strong>artist</strong>. I work in <strong>Bucaramanga, Colombia</strong>.<br><br>
+      Every day I <strong>program, study, and create programs</strong>.<br><br>
+      I love my job because <strong>combine it with music and programming</strong>. 
+      Nice to meet you all! 😊
+    </div>
+  </div>
+
+  <img src="C:\Users\PC\Documents\SENA\Instrument\collage.jpg" alt="collage" style="width:100%; border-radius:12px; margin-top:1rem;">
+
+</section>
+
+<!-- ===================== SECTION 2 ===================== -->
+<section id="s2" class="section">
+  <div class="section-header">
+    <span class="icon">🌟</span>
+    <h2>All About Me</h2>
+    <span class="badge">Evidence 2</span>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-box">
+      <div class="box-title" style="color:var(--coral);">🙋 Who am I?</div>
+      <ul>
+        <li><span class="dot" style="background:var(--coral)"></span> My name is Cristhian Camilo Lizcano</li>
+        <li><span class="dot" style="background:var(--coral)"></span> I am an artist</li>
+        <li><span class="dot" style="background:var(--coral)"></span> I am from Bucaramanga, Colombia</li>
+      </ul>
+    </div>
+
+    <div class="about-box">
+      <div class="box-title" style="color:var(--teal);">👨‍👩‍👧 Who is my family?</div>
+      <ul>
+        <li><span class="dot" style="background:var(--teal)"></span> My family is my mom, my brother. My mom is from Pamplona and my brother is from Bogotá; I'm from Floridablanca. And we
+        have a cat.</li>
+      </ul>
+    </div>
+
+    <div class="about-box">
+      <div class="box-title" style="color:var(--purple);">🎯 What do I like to do?</div>
+      <ul>
+        <li><span class="dot" style="background:var(--purple)"></span> I like learning about programming</li>
+        <li><span class="dot" style="background:var(--purple)"></span> Sing</li>
+        <li><span class="dot" style="background:var(--purple)"></span> Write songs</li>
+      </ul>
+    </div>
+
+    <div class="about-box">
+      <div class="box-title" style="color:var(--yellow); -webkit-text-stroke:0.5px #b8860b;">⭐ What is my favorite...?</div>
+      <ul>
+        <li><span class="dot" style="background:var(--yellow)"></span> Favorite style: The good music</li>
+        <li><span class="dot" style="background:var(--yellow)"></span> Favorite color: all colors!</li>
+        <li><span class="dot" style="background:var(--yellow)"></span> Favorite hobby: Singing and learning something new every day</li>
+      </ul>
+    </div>
+
+    <div class="about-box">
+      <div class="box-title" style="color:#e76f51;">🏆 Who is my favorite person?</div>
+      <ul>
+        <li><span class="dot" style="background:#e76f51"></span> My favorite people: Christ, Michael Jackson, Bruno Mars.</li>
+        <li><span class="dot" style="background:#e76f51"></span> I admire them because they have inspired so many people.</li>
+        <li><span class="dot" style="background:#e76f51"></span> They inspire me every day</li>
+      </ul>
+    </div>
+
+    <div class="about-box">
+      <div class="box-title" style="color:var(--green);">📚 What English level do I study?</div>
+      <ul>
+        <li><span class="dot" style="background:var(--green)"></span> I study basic English</li>
+        <li><span class="dot" style="background:var(--green)"></span> I practice English every day</li>
+        <li><span class="dot" style="background:var(--green)"></span> My goal is to improve every day and reach a native level</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="about-box" style="margin-top:1rem;">
+    <div class="box-title" style="color:var(--navy);">📖 What kind of food do I like?</div>
+    <ul>
+      <li><span class="dot" style="background:var(--navy)"></span> I love Colombian food</li>
+      <li><span class="dot" style="background:var(--navy)"></span> My favorite dish is bandeja paisa. 🫘</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== SECTION 3 ===================== -->
+<section id="s3" class="section">
+  <div class="section-header">
+    <span class="icon">🕐</span>
+    <h2>My Daily Routine</h2>
+    <span class="badge">Evidence 3</span>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--purple);">📅 My Routine (8–10 sentences)</h3>
+    <ul class="routine-list">
+      <li class="routine-item">
+        <span class="time-badge" style="background:#f4a261;">6:30 AM</span>
+        <span class="routine-text">I wake up at 6:30 in the morning. ⏰</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#f4a261;">7:00 AM</span>
+        <span class="routine-text">I pray from 6:30 am to 7:00 am. 🙏</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#e76f51;">7:20 AM</span>
+        <span class="routine-text">I drink coffee and have breakfast every morning. ☕</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#2ec4b6;">8:00 AM</span>
+        <span class="routine-text">I go to my study in the morning and review the day's tasks. 🗒️</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#2ec4b6;">9:00 AM</span>
+        <span class="routine-text">I'm working on pending projects, making music and videos for my music project. 🎶</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#9b5de5;">12:00 PM</span>
+        <span class="routine-text">I have lunch in the afternoon. 🍽️</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#9b5de5;">2:00 PM</span>
+        <span class="routine-text">I'll rest for a while and relax. 😴</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#457b9d;">4:00 PM</span>
+        <span class="routine-text">I'm logging on to classes to learn how to be an artist 📖</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#457b9d;">6:00 PM</span>
+        <span class="routine-text">I connect to other classes I'm taking or from SENA 💻</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#264653;">10:00 PM</span>
+        <span class="routine-text">I have dinner at night. 🍴</span>
+      </li>
+      <li class="routine-item">
+        <span class="time-badge" style="background:#264653;">11:00 PM</span>
+        <span class="routine-text">I go to bed at night. 😴</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== SECTION 4 ===================== -->
+<section id="s4" class="section">
+  <div class="section-header">
+    <span class="icon">🎵</span>
+    <h2>Recycled Musical Instrument</h2>
+    <span class="badge">Final Evidence</span>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--green);">♻️ Materials I Will Use</h3>
+    <div class="materials-grid">
+      <div class="material-tag">🥤 Plastic bottle</div>
+      <div class="material-tag">🧴 Bottle cap</div>
+      <div class="material-tag">🌾 Rice</div>
+      <div class="material-tag">🖌️ Vinyl paint</div>
+      <div class="material-tag">🎨 Brush</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--green);">🔨 My Instrument: Painted Artist Shaker 🎨🪘</h3>
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>First,</strong> I collected one empty plastic bottle from my studio.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Then,</strong> I put rice inside the bottle to make sound.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Next,</strong> I closed the bottle tightly with their cap.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>After that,</strong> I painted the bottle yellow, the color that represents Bucaramanga. 🎨</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Finally,</strong> My artist shaker is ready to play and accompany any song. 🎉</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--green);">🎶 How to Play It</h3>
+    <p style="font-size:1rem;line-height:1.8;">
+      To play the shaker, hold the bottle. Then, move it from side to side to create a rhythmic sound. You can move it
+      quickly for a cheerful rhythm or slowly for a calm one.
+    </p>
+  </div>
+
+  <div class="bonus-box">
+    <span class="star">Record Instrument ⭐</span>
+  </div>
+  <span>
+    <video src="C:\Users\PC\Documents\SENA\Instrument\Timeline 1.mp4" controls style="width:100%; border-radius:12px; margin-top:1rem;"></video>
+  </span>
+</section>
+
+<script>
+  function showTab(n) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('s' + n).classList.add('active');
+    document.querySelector('[data-tab="' + n + '"]').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
